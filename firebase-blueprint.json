@@ -1,0 +1,54 @@
+{
+  "entities": {
+    "Quiz": {
+      "title": "Quiz",
+      "description": "A quiz created by a user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "subject": { "type": "string" },
+        "description": { "type": "string" },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string" },
+              "options": { "type": "array", "items": { "type": "string" } },
+              "correctAnswer": { "type": "number" }
+            }
+          }
+        },
+        "createdAt": { "type": "number" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" }
+      },
+      "required": ["title", "subject", "questions", "authorId"]
+    },
+    "Activity": {
+      "title": "Activity",
+      "description": "A live activity event",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user": { "type": "string" },
+        "action": { "type": "string" },
+        "avatar": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["user", "action", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/quizzes/{quizId}": {
+      "schema": "Quiz",
+      "description": "Collection of quizzes"
+    },
+    "/activities/{activityId}": {
+      "schema": "Activity",
+      "description": "Collection of live activities"
+    }
+  }
+}
