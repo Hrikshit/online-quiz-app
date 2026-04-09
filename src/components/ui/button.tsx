@@ -44,8 +44,21 @@ function Button({
   className,
   variant = "default",
   size = "default",
+  asChild,
   ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+}: ButtonPrimitive.Props &
+  VariantProps<typeof buttonVariants> & { asChild?: boolean }) {
+  if (asChild) {
+    const { children, ...rest } = props
+    return (
+      <ButtonPrimitive
+        data-slot="button"
+        className={cn(buttonVariants({ variant, size, className }))}
+        render={children}
+        {...rest}
+      />
+    )
+  }
   return (
     <ButtonPrimitive
       data-slot="button"
